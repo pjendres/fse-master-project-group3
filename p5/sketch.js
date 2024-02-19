@@ -16,7 +16,7 @@ function setup() {
 }
 
 function draw() {
-  background(120);
+  background(220);
 
   //circle
   //red fille
