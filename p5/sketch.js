@@ -30,7 +30,7 @@ function draw() {
   circle(circleX, height / 2, 50);
 
   //rectangle
-  //blue fill
+  //green fill
   fill(0, 0, 255);
   //yellow outline
   stroke(255, 255, 0); //yellow outline
