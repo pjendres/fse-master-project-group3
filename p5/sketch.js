@@ -57,7 +57,7 @@ function draw() {
   );
 
   //font size
-  textSize(32);
+  textSize(69);
   //white fill
   fill(255, 255, 255);
   //black outline
