@@ -1,4 +1,4 @@
-//initialize shapes
+//initialize shapes ???
 let circleX, rectangleX, triangleX;
 //1 = right
 //-1 = left
