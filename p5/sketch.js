@@ -38,7 +38,7 @@ function draw() {
   strokeWeight(2);
   //draw rectangle
   //x,y,width,height
-  rect(rectangleX, height / 4, 80, 40);
+  rect(rectangleX, height / 4, 90, 40);
 
   square()
   //triangle
