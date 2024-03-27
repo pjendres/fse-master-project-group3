@@ -9,6 +9,7 @@ function setup() {
   //initialize and push programs to the programs array
   programs.push(new HomeScreen());
   programs.push(new Twister());
+  programs.push(new SmallButtons());
 
   //try setup
   for (let i = 0; i < programs.length; i++) {

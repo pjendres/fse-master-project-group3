@@ -23,7 +23,9 @@ class HomeScreen {
     this.buttons.push(new MenuButton("Tracing Path", this.x, this.start + (this.dist * 3),  this.width, 30));
 
   }
-  
+  setup() {
+    createCanvas(500, 500);
+  }
   draw() {
     
     fill(255);
@@ -58,7 +60,7 @@ class HomeScreen {
         *   change 1 to "i + 1"
         *   to implement linking to other games
         */
-        currProgram = 1;
+        currProgram = i + 1;
       }
 
     }
