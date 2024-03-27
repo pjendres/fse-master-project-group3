@@ -1,44 +1,40 @@
 
 
 let currProgram = 0;
-let twister;
-let homeScreen;
+let programs = [];
 
 function setup() {
   createCanvas(400, 400);
-
-  //initialize twister
-  twister = new Twister();
-  twister.setup();
   
-  //initialize main menu
-  homeScreen = new HomeScreen();
+  programs.push(new HomeScreen());
+  programs.push(new Twister());
+
+  //try setup
+  for (let i = 0; i < programs.length; i++) {
+    try {
+      programs[i].setup();
+    } catch {}
+  } 
 }
 
 function draw() { 
-
   background(220);
-  //check which program to draw
-  //menu
-  if (currProgram == 0) {
-    homeScreen.draw();
-  } 
-  //twister
-  else if (currProgram == 1) {
-    twister.draw();
-  }
+
+  //try draw
+  try {
+    programs[currProgram].draw();
+  } catch {}
+
 }
 
 //when mouse is clicked
 function mouseClicked() {
-  //main menu
-  if (currProgram == 0) {
-    homeScreen.mouseClicked();
-  } 
-  //twister game
-  else if (currProgram == 1) {
-    twister.mouseClicked();
-  }
+  //try mouse
+  try {
+    programs[currProgram].mouseClicked();
+  } catch {}
+  
+
 }
 
 

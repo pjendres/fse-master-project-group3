@@ -6,10 +6,12 @@ class Twister {
     this.numColumns = 3;
     this.score = 0;
     this.circles = []; 
+
   }
 
   setup() {
-
+    //labels for the circles
+    let circleLabels = ["Index", "Middle", "Ring"];
     //create bound circle for each column
     for (let i = 0; i < this.numColumns; i++) {
       //width - (column width based on #columns * current column)
@@ -18,18 +20,18 @@ class Twister {
       let rightWall = width - ((width / this.numColumns) * i);
       let leftWall = width - ((width / this.numColumns) * (i + 1));
       //add to array
-      this.circles.push(new TwisterBoundCircle("circle" + i, leftWall, rightWall, 0, height, this.circleSpeed, this.circleSize));
+      this.circles.push(new TwisterBoundCircle(circleLabels[i], leftWall, rightWall, 0, height, this.circleSpeed, this.circleSize));
     }
   }
 
   draw() {
     strokeWeight(1);
     stroke(1);
+
     //for each circle in the array
     for (let i = 0; i < this.circles.length; i++) {
       //check if mouse is near circle
       //for score and color changes
-      
       if (this.circles[i].isHovered() == true) {
         this.score += 1;
       }
@@ -40,12 +42,15 @@ class Twister {
     text("Score: " + this.score, 10, 15);
     text("Exit", width - 30, 15);
 
+    
+
   }
 
   mouseClicked() {
+    //exit button
     if (dist(mouseX, mouseY, width - 30, 15) < 30) {
       //reset score
-      twister.score = 0;
+      programs[1].score = 0;
       //switch to home
       currProgram = 0;
     }
@@ -79,7 +84,7 @@ class TwisterBoundCircle {
   display() {
 
     //draw circle
-    ellipse(this.x, this.y, this.size);
+    circle(this.x, this.y, this.size);
 
     //move circle
     this.x += this.speed * this.dirX;
@@ -92,29 +97,41 @@ class TwisterBoundCircle {
     //increment random direction timer
     this.timer += 1;
     //change direction if at wall
-    if (this.x > this.right - this.size / 2 || this.x < this.left + this.size / 2) {
+      //right
+    if (this.x > this.right - this.size / 2 
+      //left
+      || this.x < this.left + this.size / 2) {
       this.dirX *= -1;
     }
-    if (this.y > this.bottom - this.size / 2 || this.y < this.top + this.size / 2) {
+      //bottom
+    if (this.y > this.bottom - this.size / 2 
+      //top
+      || this.y < this.top + this.size / 2) {
       this.dirY *= -1;  
     } 
-    //once timer reaches limit, randomly change the direction and reset the timer
+    //once timer reaches limit
     else if (this.timer >= 50) {
+      //randomly change the directions
       this.dirX *= random() < 0.5 ? -1 : 1;
       this.dirY *= random() < 0.5 ? -1 : 1;
+      //reset timer
       this.timer = 0;
     }
 
 
   }
 
-  //check if mouse is near circle
+  
+  //return boolean for score tracking
   isHovered () {
-    let distanceToCircle = dist(mouseX, mouseY, this.x, this.y);
-    if (distanceToCircle < this.size - 15) {
+    //check if mouse is near circle
+    if (dist(mouseX, mouseY, this.x, this.y) < this.size - 30) {
+      //green
       fill(0, 255, 0);
       return true;
+
     } else {
+      //red
       fill(255, 0, 0);
       return false;
     }

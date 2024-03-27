@@ -1,9 +1,11 @@
 
+//load image
 let handImage;
 function preload() {
   handImage = loadImage('hand.png');
 }
 
+//class for homescreen program
 class HomeScreen {
   constructor() {
     this.x = 10;
@@ -14,28 +16,30 @@ class HomeScreen {
     this.buttons = []; 
 
 
-    // Initialize menu buttons
+    //menu buttons
     this.buttons.push(new MenuButton("Twister", this.x, this.start + (this.dist * 0),  this.width, this.height));
     this.buttons.push(new MenuButton("Small Buttons", this.x, this.start + (this.dist * 1),  this.width, 30));
+    this.buttons.push(new MenuButton("Twisting Circle", this.x, this.start + (this.dist * 2),  this.width, 30));
+    this.buttons.push(new MenuButton("Tracing Path", this.x, this.start + (this.dist * 3),  this.width, 30));
 
   }
   
   draw() {
-    background(220); // Clear the background each frame
     
     fill(255);
     strokeWeight(1);
-    // Main menu box
+
+    //main menu box
     rect(0, 10, width, 30);
 
     fill(0);
     strokeWeight(0);
     text("FMS Games", this.x, 30);
 
-    // Display the image
+    //display background image
     image(handImage, -150, 0,);
 
-    // Display menu buttons
+    //display menu buttons
     for (let i = 0; i < this.buttons.length; i++){
       this.buttons[i].display();
     }
@@ -43,17 +47,26 @@ class HomeScreen {
 
   }
   
+  //when mouse is clicked
   mouseClicked() {
-    // Check if any button is clicked
-    if (this.twisterButton.isHovered()) {
-      currProgram = 1;
-    }
-    if (this.smallButtonsButton.isHovered()) {
-      currProgram = 2;
+    //check if any button is hovered
+    for (let i = 0; i < this.buttons.length; i++){
+      if (this.buttons[i].isHovered()) {
+        //switch to respective program
+        /* TODO: 
+        *
+        *   change 1 to "i + 1"
+        *   to implement linking to other games
+        */
+        currProgram = 1;
+      }
+
     }
   }
 }
 
+
+//class for menu buttons
 class MenuButton {
   constructor(text, x, y, width, height) {
     this.text = text;
@@ -66,23 +79,31 @@ class MenuButton {
   display() {
     // Check if the mouse is hovering over the button
     if (this.isHovered()) {
-      fill(200); // Change the button color when hovered
+      //change color when hovered
+      fill(200);
     } else {
-      fill(255); // Default button color
+      //default color
+      fill(255);
     }
     
     strokeWeight(1);
+    //draw rectangle
     rect(this.x, this.y, this.width, this.height);
 
     fill(0);
     strokeWeight(0);
+    //draw text
     text(this.text, this.x + 10, this.y + this.height / 2);
   }
 
   isHovered() {
+        //right
     return mouseX > this.x 
+        //left
         && mouseX < this.x + this.width 
+        //bottom
         && mouseY > this.y 
+        //top
         && mouseY < this.y + this.height;
   }
 }
