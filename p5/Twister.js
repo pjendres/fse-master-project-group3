@@ -6,6 +6,14 @@ class Twister {
     this.numColumns = 3;
     this.score = 0;
     this.circles = []; 
+    this.gameOver = false;
+    this.winningScore = 1000;
+
+    
+    this.gameOverWidth = 200;
+    this.gameOverHeight = 150;
+    this.gameOverX = width/2 - this.gameOverWidth/2;
+    this.gameOverY = height/2 - this.gameOverHeight/2;
 
   }
 
@@ -25,9 +33,30 @@ class Twister {
   }
 
   draw() {
+    
     strokeWeight(1);
     stroke(1);
+    if (this.score >= this.winningScore) {
+      this.gameOver = true;
+    }
+    
+    if (this.gameOver == false) {
+      this.drawCircles();
+    }
+    else {
+      this.drawGameOver();
+      
+    }
 
+    //draw text elements
+    fill(0);
+    strokeWeight(0);
+    text("Score: " + this.score, 10, 15);
+    text("Exit", width - 30, 15);
+
+  }
+
+  drawCircles() {
     //for each circle in the array
     for (let i = 0; i < this.circles.length; i++) {
       //check if mouse is near circle
@@ -38,22 +67,50 @@ class Twister {
       //draw circle
       this.score += this.circles[i].display() ? 1 : 0;
     }
-    //draw text elements
-    text("Score: " + this.score, 10, 15);
-    text("Exit", width - 30, 15);
+  }
 
+  drawGameOver() {
+        
+    fill(255);
+    strokeWeight(1);
+
+
+    //draw box
+    rect(this.gameOverX, this.gameOverY, this.gameOverWidth, this.gameOverHeight);
+    fill(0);
+    strokeWeight(0);
+    //display game over and score
+
+    if (this.score >= this.winningScore) {
+      text("You Win!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
+    }
+    else {
+      text("GAME OVER!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
+    }
     
 
+    //exit button
+    text("Exit", this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4 + 75)
+    
+    
   }
 
   mouseClicked() {
     //exit button
-    if (dist(mouseX, mouseY, width - 30, 15) < 30) {
+    if ((dist(mouseX, mouseY, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4 + 75) < 30) && this.gameOver == true) {
       //reset score
       programs[1].score = 0;
+      //reset game over
+      this.gameOver = false;
       //switch to home
       currProgram = 0;
     }
+
+    if (dist(mouseX, mouseY, width - 30, 15) < 30) {
+      this.gameOver = true;
+    }
+
+
   }
   
 }
