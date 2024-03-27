@@ -6,6 +6,7 @@ let programs = [];
 function setup() {
   createCanvas(400, 400);
   
+  //initialize and push programs to the programs array
   programs.push(new HomeScreen());
   programs.push(new Twister());
 
@@ -18,13 +19,13 @@ function setup() {
 }
 
 function draw() { 
+  //set background color
   background(220);
 
   //try draw
   try {
     programs[currProgram].draw();
   } catch {}
-
 }
 
 //when mouse is clicked
@@ -33,8 +34,6 @@ function mouseClicked() {
   try {
     programs[currProgram].mouseClicked();
   } catch {}
-  
-
 }
 
 

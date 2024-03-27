@@ -1,20 +1,19 @@
 class Twister {
   constructor() {
-    //circle speed and size
+    //circle variables
     this.circleSpeed = 0.5;
     this.circleSize = 100;
     this.numColumns = 3;
     this.score = 0;
     this.circles = []; 
+    
+    //game over variables
     this.gameOver = false;
     this.winningScore = 1000;
-
-    
     this.gameOverWidth = 200;
     this.gameOverHeight = 150;
     this.gameOverX = width/2 - this.gameOverWidth/2;
     this.gameOverY = height/2 - this.gameOverHeight/2;
-
   }
 
   setup() {
@@ -71,16 +70,14 @@ class Twister {
 
   drawGameOver() {
         
+    //draw box
     fill(255);
     strokeWeight(1);
-
-
-    //draw box
     rect(this.gameOverX, this.gameOverY, this.gameOverWidth, this.gameOverHeight);
+
+    //display game over and score
     fill(0);
     strokeWeight(0);
-    //display game over and score
-
     if (this.score >= this.winningScore) {
       text("You Win!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
     }
@@ -88,7 +85,6 @@ class Twister {
       text("GAME OVER!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
     }
     
-
     //exit button
     text("Exit", this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4 + 75)
     
@@ -141,6 +137,7 @@ class TwisterBoundCircle {
   display() {
 
     //draw circle
+    strokeWeight(1);
     circle(this.x, this.y, this.size);
 
     //move circle
@@ -149,6 +146,7 @@ class TwisterBoundCircle {
   
     //draw label
     fill(0);
+    strokeWeight(0);
     text(this.name, this.x - 19, this.y + 3);
 
     //increment random direction timer
