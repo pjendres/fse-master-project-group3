@@ -8,37 +8,45 @@ function preload() {
 //class for homescreen program
 class HomeScreen {
   constructor() {
-    this.x = 10;
-    this.start = 100;
+    //buttons origin location
+    this.originX = 10;
+    this.originY = 100;
+
+    //default distance between buttons
     this.dist = 50;
+
+    //default size of buttons
     this.width = 150;
     this.height = 30;
+
+    //initialize buttons array
     this.buttons = []; 
 
-
-    //menu buttons
-    this.buttons.push(new MenuButton("Twister", this.x, this.start + (this.dist * 0),  this.width, this.height));
-    this.buttons.push(new MenuButton("Small Buttons", this.x, this.start + (this.dist * 1),  this.width, 30));
-    this.buttons.push(new MenuButton("Twisting Circle", this.x, this.start + (this.dist * 2),  this.width, 30));
-    this.buttons.push(new MenuButton("Tracing Path", this.x, this.start + (this.dist * 3),  this.width, 30));
-
+    //intialize menu buttons and add them to the array
+    //name, x, y, width, height
+    this.buttons.push(new MenuButton("Twister", this.originX, this.originY + (this.dist * 0),  this.width, this.height));
+    this.buttons.push(new MenuButton("Small Buttons", this.originX, this.originY + (this.dist * 1),  this.width, 30));
+    this.buttons.push(new MenuButton("Twisting Circle", this.originX, this.originY + (this.dist * 2),  this.width, 30));
+    this.buttons.push(new MenuButton("Tracing Path", this.originX, this.originY + (this.dist * 3),  this.width, 30));
   }
-  setup() {
-    createCanvas(500, 500);
-  }
+
+
   draw() {
-    
+    resizeCanvas(500,500);
+    background(220);
+    //title box
     fill(255);
     strokeWeight(1);
-
-    //main menu box
     rect(0, 10, width, 30);
 
+    //title text 
     fill(0);
     strokeWeight(0);
-    text("FMS Games", this.x, 30);
+    textSize(20);
+    text("FMS Games", this.originX, 35);
 
     //display background image
+    textSize(12);
     image(handImage, -150, 0,);
 
     //display menu buttons
@@ -55,14 +63,8 @@ class HomeScreen {
     for (let i = 0; i < this.buttons.length; i++){
       if (this.buttons[i].isHovered()) {
         //switch to respective program
-        /* TODO: 
-        *
-        *   change 1 to "i + 1"
-        *   to implement linking to other games
-        */
         currProgram = i + 1;
       }
-
     }
   }
 }

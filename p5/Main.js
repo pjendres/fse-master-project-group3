@@ -4,7 +4,7 @@ let currProgram = 0;
 let programs = [];
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(500, 500);
   
   //initialize and push programs to the programs array
   programs.push(new HomeScreen());

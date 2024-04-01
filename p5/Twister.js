@@ -1,3 +1,4 @@
+//class for twister game
 class Twister {
   constructor() {
     //circle variables
@@ -14,10 +15,8 @@ class Twister {
     this.gameOverHeight = 150;
     this.gameOverX = width/2 - this.gameOverWidth/2;
     this.gameOverY = height/2 - this.gameOverHeight/2;
-  }
 
-  setup() {
-    //labels for the circles
+    //initialize the circles for the game and add them to an array
     let circleLabels = ["Index", "Middle", "Ring"];
     //create bound circle for each column
     for (let i = 0; i < this.numColumns; i++) {
@@ -31,20 +30,27 @@ class Twister {
     }
   }
 
+  setup() {
+    resizeCanvas(500, 500);
+  }
+
   draw() {
-    
     strokeWeight(1);
     stroke(1);
+    //once the winning score is reached
     if (this.score >= this.winningScore) {
+      //end the game
       this.gameOver = true;
     }
     
+    //if game is not over
     if (this.gameOver == false) {
+      //draw the game
       this.drawCircles();
     }
     else {
+      //draw the game over screen
       this.drawGameOver();
-      
     }
 
     //draw text elements
@@ -55,12 +61,14 @@ class Twister {
 
   }
 
+  //draw the game
   drawCircles() {
     //for each circle in the array
     for (let i = 0; i < this.circles.length; i++) {
       //check if mouse is near circle
-      //for score and color changes
+      //calling isHovered will change the color and return bool
       if (this.circles[i].isHovered() == true) {
+        //increment score
         this.score += 1;
       }
       //draw circle
@@ -68,6 +76,7 @@ class Twister {
     }
   }
 
+  //draw the game over screen
   drawGameOver() {
         
     //draw box
@@ -91,9 +100,10 @@ class Twister {
     
   }
 
+  //when mouse is clicked
   mouseClicked() {
-    //exit button
-    if ((dist(mouseX, mouseY, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4 + 75) < 30) && this.gameOver == true) {
+    //if game over is true and user clicks exit button
+    if ((this.gameOver == true && dist(mouseX, mouseY, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4 + 75) < 30)) {
       //reset score
       programs[1].score = 0;
       //reset game over
@@ -102,7 +112,9 @@ class Twister {
       currProgram = 0;
     }
 
+    //if user clicks the corner exit button
     if (dist(mouseX, mouseY, width - 30, 15) < 30) {
+      //set game over to true
       this.gameOver = true;
     }
 
@@ -185,7 +197,8 @@ class TwisterBoundCircle {
       fill(0, 255, 0);
       return true;
 
-    } else {
+    } 
+    else {
       //red
       fill(255, 0, 0);
       return false;
