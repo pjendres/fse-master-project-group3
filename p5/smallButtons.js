@@ -6,10 +6,10 @@ class SmallButtons {
 
 
     setup() {
-        createCanvas(700, 550);
+        createCanvas(500, 500);
         for (let i = 0; i < 10; i++) {
-            let x = constrain(random(600), 20, 680);
-            let y = constrain(random(450), 20, 530);
+            let x = constrain(random(400), 20, 480);
+            let y = constrain(random(400), 20, 480);
             let r = random(5, 10);
             let b = new Bubble(x, y, r);
             this.bubbles.push(b);
