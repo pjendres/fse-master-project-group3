@@ -38,6 +38,11 @@ class SmallButtons {
                 this.score += 1;
             }
         }
+        if (score < 10) {
+          if ((mouseX < 480 && mouseX > 430) && (mouseY > 15 && mouseY < 35)) {
+            currProgram = 0;
+          }
+        }
     }
 
     draw() {
@@ -56,15 +61,17 @@ class SmallButtons {
         textSize(15);
         textAlign(LEFT);
         text('Score: ' + this.score, 20, 30);
-        //textSize(15);
-        //textAlign(RIGHT);
-        //text('Restart', 680, 30);
+        textSize(15);
+        textAlign(RIGHT);
+        text('Main Menu', 680, 30);
         
         if (this.score == 10) {
-            textSize(90);
-            fill(250,0,0);
-            textAlign(CENTER);
-            text("Level Completed!", 350, 225);
+          textSize(60);
+          fill(250,0,0);
+          textAlign(CENTER);
+          text("Level Completed!", 250, 225);
+          textSize(45);
+          text("Play Again?", 250, 275);
         }
     }
 }
