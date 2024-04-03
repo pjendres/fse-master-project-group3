@@ -38,7 +38,7 @@ class SmallButtons {
                 this.score += 1;
             }
         }
-        if (score < 10) {
+        if (score <= 10) {
           if ((mouseX < 480 && mouseX > 430) && (mouseY > 15 && mouseY < 35)) {
             currProgram = 0;
           }
