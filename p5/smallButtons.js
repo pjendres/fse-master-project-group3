@@ -38,12 +38,14 @@ class SmallButtons {
                 this.score += 1;
             }
         }
-        if (score < 10) {
+
+        if (this.score < 10) {
           if ((mouseX < 480 && mouseX > 430) && (mouseY > 15 && mouseY < 35)) {
+
             currProgram = 0;
           }
         }
-        if (score == 10) {
+        if (this.score == 10) {
           if ((mouseX < 370 && mouseX > 130) && (mouseY > 240 && mouseY < 280)) {
             currProgram = 0;
           }
