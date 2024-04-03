@@ -87,10 +87,13 @@ class Twister {
     //display game over and score
     fill(0);
     strokeWeight(0);
+    //if winning score was reached
     if (this.score >= this.winningScore) {
+      //display you win
       text("You Win!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
     }
     else {
+      //display game over
       text("GAME OVER!\nScore: " + this.score, this.gameOverX + this.gameOverWidth/2 - 50, this.gameOverY + this.gameOverHeight/4)
     }
     
@@ -117,8 +120,6 @@ class Twister {
       //set game over to true
       this.gameOver = true;
     }
-
-
   }
   
 }

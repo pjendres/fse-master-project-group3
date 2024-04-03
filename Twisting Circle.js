@@ -2,17 +2,20 @@ let circle = {
   x: 200,
   y: 200,
   size: 50,
-  startX: 0, // store circle's starting X position
-  startY: 0 // store circle's starting Y position 
+  startX: 0, // circle's starting X position
+  startY: 0 // circle's starting Y position
 };
 
 let dragging = false;
-let offsetX, offsetY; // Mouse click offset
+let offsetX, offsetY; // mouse click offset
 let currentInstruction = '';
 let instructions = ['left', 'right', 'up', 'down'];
 let nextInstructionTime = 0;
 let feedbackMessage = ''; 
 let backgroundColor = 204; // default background color
+let score = 0; 
+let level = 1; 
+let pointsNeededForNextLevel = 5; // points needed to reach the next level
 
 function setup() {
   createCanvas(400, 400);
@@ -25,22 +28,24 @@ function draw() {
   background(backgroundColor);
 
   // Draw the circle
-  fill(100, 100, 250); 
+  fill(100, 100, 250); // circle's color
   ellipse(circle.x, circle.y, circle.size);
 
   // Display instructions
   fill(0);
   text(currentInstruction, width / 2, 50);
+  // score and level at the top
+  text(`Score: ${score} | Level: ${level}`, width / 2, 20);
 
-  // Display feedback message
-  text(feedbackMessage, width / 2, height - 50);
+  // feedback message below the instructions
+  text(feedbackMessage, width / 2, 80);
 
-  // Check for instruction update
+  // check for instruction update
   if (millis() > nextInstructionTime) {
     setNextInstruction();
-    feedbackMessage = ''; 
-    backgroundColor = 204; // reset background color
-    resetCirclePosition(); // reset circle position
+    feedbackMessage = 'Hurry up!';
+    backgroundColor = 204; 
+    resetCirclePosition(); 
   }
 }
 
@@ -57,8 +62,8 @@ function mousePressed() {
 
 function mouseReleased() {
   dragging = false;
-  checkMovementDirection(); // check if correct
-  resetCirclePosition(); // move the circle back to the center
+  checkMovementDirection(); // check if movement is correct
+  resetCirclePosition(); // move circle back to center
 }
 
 function mouseDragged() {
@@ -70,7 +75,7 @@ function mouseDragged() {
 
 function setNextInstruction() {
   currentInstruction = random(instructions); // randomly picks a new direction
-  nextInstructionTime = millis() + 5000; // changes instruction every 5 seconds
+  nextInstructionTime = millis() + 5000 - level * 100; // decrease time with higher levels for difficulty
 }
 
 function checkMovementDirection() {
@@ -96,6 +101,12 @@ function checkMovementDirection() {
   if (isCorrect) {
     feedbackMessage = "Good job!";
     backgroundColor = color(0, 255, 0); // Green for correct
+    score++; // increase score for correct action
+    if (score >= pointsNeededForNextLevel) {
+      level++;
+      pointsNeededForNextLevel *= 2; // double points needed per level
+      feedbackMessage += " Level Up!";
+    }
   } else {
     feedbackMessage = "Try again!";
     backgroundColor = color(255, 0, 0); // Red for wrong
@@ -103,7 +114,7 @@ function checkMovementDirection() {
 }
 
 function resetCirclePosition() {
- 
+  // reset circle position to center
   circle.x = 200;
   circle.y = 200;
 }
