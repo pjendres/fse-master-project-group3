@@ -43,7 +43,8 @@ class HomeScreen {
     fill(0);
     strokeWeight(0);
     textSize(20);
-    text("FMS Games", this.originX, 35);
+    textAlign(LEFT, CENTER);
+    text("FMS Games", this.originX, 30);
 
     //display background image
     textSize(12);

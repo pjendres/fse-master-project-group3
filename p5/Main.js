@@ -1,5 +1,3 @@
-
-
 let currProgram = 0;
 let programs = [];
 
@@ -10,6 +8,7 @@ function setup() {
   programs.push(new HomeScreen());
   programs.push(new Twister());
   programs.push(new SmallButtons());
+  programs.push(new TwistingCircle());
 
   //try setup
   for (let i = 0; i < programs.length; i++) {
@@ -29,7 +28,7 @@ function draw() {
   } catch {}
 }
 
-//when mouse is clicked
+//mouse functions
 function mouseClicked() {
   //try mouse
   try {
@@ -37,6 +36,26 @@ function mouseClicked() {
   } catch {}
 }
 
+function mousePressed() {
+  //try mouse
+  try {
+    programs[currProgram].mousePressed();
+  } catch {}
+}
+
+function mouseReleased() {
+  //try mouse
+  try {
+    programs[currProgram].mouseReleased();
+  } catch {}
+}
+
+function mouseDragged() {
+  //try mouse
+  try {
+    programs[currProgram].mouseDragged();
+  } catch {}
+}
 
 
 
