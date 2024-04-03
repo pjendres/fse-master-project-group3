@@ -68,7 +68,7 @@ class SmallButtons {
         text('Score: ' + this.score, 20, 30);
         textSize(15);
         textAlign(RIGHT);
-        text('Main Menu', 680, 30);
+        text('Main Menu', 480, 30);
         
         if (this.score == 10) {
           textSize(60);
