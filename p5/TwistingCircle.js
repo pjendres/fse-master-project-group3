@@ -16,7 +16,7 @@ let backgroundColor;
 let score = 0; 
 let level = 1;
 let pointsNeededForNextLevel = 5; // points needed to reach the next level
-let showInstructions = true; // Show instructions initially
+let showInstructions = true; 
 
 function setup() {
   createCanvas(400, 400);
