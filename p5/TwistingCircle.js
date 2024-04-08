@@ -12,21 +12,20 @@ class TwistingCircle {
     this.offsetX, this.offsetY; // mouse click offset
     this.currentInstruction = '';
     this.instructions = ['left', 'right', 'up', 'down'];
-    this.nextInstructionTime = 0;
+    this.ctionTime = 0;
     this.feedbackMessage = ''; 
     this.backgroundColor = 204; // default background color
     this.score = 0; 
     this.level = 1; 
     this.pointsNeededForNextlevel = 5; // points needed to reach the next this.level
-    this.timer = 0;
   }
 
   setup() {
     setNextInstruction();
   }
-
+  
   draw() {
-    
+    //set up canvas and text size
     resizeCanvas(400, 400);
     textAlign(CENTER, CENTER);
     textSize(24);
@@ -39,15 +38,15 @@ class TwistingCircle {
     // Display this.instructions
     fill(0);
     text(this.currentInstruction, width / 2, 50);
+
     // this.score and level at the top
     text(`Score: ${this.score} | Level: ${this.level}`, width / 2, 20);
 
     // feedback message below the instructions
     text(this.feedbackMessage, width / 2, 80);
-
+    
     // check for instruction update
-    if (millis() > this.nextInstructionTime) {
-      
+    if (millis() > this.ctionTime) {
       this.setNextInstruction();
       this.feedbackMessage = 'Hurry up!';
       this.backgroundColor = 204; 
@@ -82,7 +81,7 @@ class TwistingCircle {
   setNextInstruction() {
     console.log("hello");
     this.currentInstruction = random(this.instructions); // randomly picks a new direction
-    this.nextInstructionTime = millis() + 5000 - this.level * 100; // decrease time with higher levels for difficulty
+    this.ctionTime = millis() + 5000 - this.level * 100; // decrease time with higher levels for difficulty
   }
 
   checkMovementDirection() {

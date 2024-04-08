@@ -9,6 +9,9 @@ function setup() {
   programs.push(new Twister());
   programs.push(new SmallButtons());
   programs.push(new TwistingCircle());
+  programs.push(new TracingPath());
+
+  programs.push(new TwisterHelp());
 
   //try setup
   for (let i = 0; i < programs.length; i++) {

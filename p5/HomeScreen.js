@@ -28,6 +28,11 @@ class HomeScreen {
     this.buttons.push(new MenuButton("Small Buttons", this.originX, this.originY + (this.dist * 1),  this.width, 30));
     this.buttons.push(new MenuButton("Twisting Circle", this.originX, this.originY + (this.dist * 2),  this.width, 30));
     this.buttons.push(new MenuButton("Tracing Path", this.originX, this.originY + (this.dist * 3),  this.width, 30));
+
+    //draw help screen buttons
+    for (let i = 0; i < 4; i++) {
+      this.buttons.push(new MenuButton("?", this.originX + this.width, this.originY + (this.dist * i),  25, 30));
+    }
   }
 
 
@@ -65,6 +70,7 @@ class HomeScreen {
       if (this.buttons[i].isHovered()) {
         //switch to respective program
         currProgram = i + 1;
+
       }
     }
   }
