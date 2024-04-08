@@ -1,127 +1,145 @@
-class TwistingCircle {
-  constructor() {
-    this.circle = {
-      x: 200,
-      y: 200,
-      size: 50,
-      startX: 0, // this.circle's starting X position
-      startY: 0 // this.circle's starting Y position
-    };
-  
-    this.dragging = false;
-    this.offsetX, this.offsetY; // mouse click offset
-    this.currentInstruction = '';
-    this.instructions = ['left', 'right', 'up', 'down'];
-    this.ctionTime = 0;
-    this.feedbackMessage = ''; 
-    this.backgroundColor = 204; // default background color
-    this.score = 0; 
-    this.level = 1; 
-    this.pointsNeededForNextlevel = 5; // points needed to reach the next this.level
-  }
+let circle = {
+  x: 200,
+  y: 200,
+  size: 50,
+  startX: 0, // circle's starting X position
+  startY: 0 // circle's starting Y position
+};
 
-  setup() {
+let dragging = false;
+let offsetX, offsetY; // mouse click offset
+let currentInstruction = '';
+let instructions = ['left', 'right', 'up', 'down'];
+let nextInstructionTime = 0;
+let feedbackMessage = ''; 
+let backgroundColor; 
+let score = 0; 
+let level = 1;
+let pointsNeededForNextLevel = 5; // points needed to reach the next level
+let showInstructions = true; 
+
+function setup() {
+  createCanvas(400, 400);
+  textAlign(CENTER, CENTER);
+  textSize(24);
+  backgroundColor = color('purple'); 
+  setNextInstruction();
+}
+
+function draw() {
+  if (showInstructions) {
+    displayInstructions();
+  } else {
+    gameLoop();
+  }
+}
+
+function displayInstructions() {
+  background(204);
+  fill(0);
+  textSize(16);
+  text("Welcome to Twisting Circle!\n\n" +
+       "Instructions:\n" +
+       "- Follow the on-screen instructions to move the circle.\n" +
+       "- Click and drag the circle in the direction indicated.\n" +
+       "- Try to react as quickly and accurately as possible.\n\n" +
+       "Click anywhere to start!", width / 2, height / 2);
+}
+
+function gameLoop() {
+  background(backgroundColor);
+
+  
+  fill(100, 100, 250); // circle's color
+  ellipse(circle.x, circle.y, circle.size);
+
+  // display instructions and feedback
+  fill(0);
+  textSize(20); 
+  text(currentInstruction, width / 2, 50);
+  text(`Score: ${score} | Level: ${level}`, width / 2, 20);
+  textSize(16);
+  text(feedbackMessage, width / 2, 80);
+
+ 
+  if (millis() > nextInstructionTime) {
     setNextInstruction();
+    feedbackMessage = 'Hurry up!';
+    resetCirclePosition(); 
+  }
+}
+
+function mousePressed() {
+  if (showInstructions) {
+    showInstructions = false; // hide instructions and start the game
+  } else {
+    let d = dist(mouseX, mouseY, circle.x, circle.y);
+    if (d < circle.size / 2) {
+      dragging = true;
+      offsetX = circle.x - mouseX;
+      offsetY = circle.y - mouseY;
+      circle.startX = circle.x;
+      circle.startY = circle.y;
+    }
+  }
+}
+
+function mouseReleased() {
+  if (!showInstructions) {
+    dragging = false;
+    checkMovementDirection();
+    resetCirclePosition();
+  }
+}
+
+function mouseDragged() {
+  if (dragging && !showInstructions) {
+    circle.x = mouseX + offsetX;
+    circle.y = mouseY + offsetY;
+  }
+}
+
+function setNextInstruction() {
+  currentInstruction = random(instructions);
+  nextInstructionTime = millis() + 5000 - level * 100; // decrease time with higher levels
+}
+
+function checkMovementDirection() {
+  let movedX = circle.x - circle.startX;
+  let movedY = circle.y - circle.startY;
+  let isCorrect = false;
+
+  switch (currentInstruction) {
+    case 'left':
+      isCorrect = movedX < 0;
+      break;
+    case 'right':
+      isCorrect = movedX > 0;
+      break;
+    case 'up':
+      isCorrect = movedY < 0;
+      break;
+    case 'down':
+      isCorrect = movedY > 0;
+      break;
   }
   
-  draw() {
-    //set up canvas and text size
-    resizeCanvas(400, 400);
-    textAlign(CENTER, CENTER);
-    textSize(24);
-    background(this.backgroundColor);
-
-    // Draw the circle
-    fill(100, 100, 250); // circle's color
-    ellipse(this.circle.x, this.circle.y, this.circle.size);
-
-    // Display this.instructions
-    fill(0);
-    text(this.currentInstruction, width / 2, 50);
-
-    // this.score and level at the top
-    text(`Score: ${this.score} | Level: ${this.level}`, width / 2, 20);
-
-    // feedback message below the instructions
-    text(this.feedbackMessage, width / 2, 80);
-    
-    // check for instruction update
-    if (millis() > this.ctionTime) {
-      this.setNextInstruction();
-      this.feedbackMessage = 'Hurry up!';
-      this.backgroundColor = 204; 
-      this.resetcirclePosition(); 
+  if (isCorrect) {
+    feedbackMessage = "Good job!";
+    backgroundColor = color(0, 255, 0); // Green for correct
+    score++; // increase score
+    if (score >= pointsNeededForNextLevel) {
+      level++;
+      pointsNeededForNextLevel *= 2; // double points needed for next level
+      feedbackMessage += " Level Up!";
     }
+  } else {
+    feedbackMessage = "Try again!";
+    backgroundColor = color(255, 0, 0); // Red for incorrect
   }
+}
 
-  mousePressed() {
-    let d = dist(mouseX, mouseY, this.circle.x, this.circle.y);
-    if (d < this.circle.size / 2) {
-      this.dragging = true;
-      this.offsetX = this.circle.x - mouseX;
-      this.offsetY = this.circle.y - mouseY;
-      this.circle.startX = this.circle.x; 
-      this.circle.startY = this.circle.y; 
-    }
-  }
-
-  mouseReleased() {
-    this.dragging = false;
-    this.checkMovementDirection(); // check if movement is correct
-    this.resetcirclePosition(); // move circle back to center
-  }
-
-  mouseDragged() {
-    if (this.dragging) {
-      this.circle.x = mouseX + this.offsetX;
-      this.circle.y = mouseY + this.offsetY;
-    }
-  }
-
-  setNextInstruction() {
-    console.log("hello");
-    this.currentInstruction = random(this.instructions); // randomly picks a new direction
-    this.ctionTime = millis() + 5000 - this.level * 100; // decrease time with higher levels for difficulty
-  }
-
-  checkMovementDirection() {
-    let movedX = this.circle.x - this.circle.startX;
-    let movedY = this.circle.y - this.circle.startY;
-    let isCorrect = false;
-
-    switch (this.currentInstruction) {
-      case 'left':
-        isCorrect = movedX < 0;
-        break;
-      case 'right':
-        isCorrect = movedX > 0;
-        break;
-      case 'up':
-        isCorrect = movedY < 0;
-        break;
-      case 'down':
-        isCorrect = movedY > 0;
-        break;
-    }
-    
-    if (isCorrect) {
-      this.feedbackMessage = "Good job!";
-      this.backgroundColor = color(0, 255, 0); // Green for correct
-      this.score++; // increase score for correct action
-      if (this.score >= this.pointsNeededForNextlevel) {
-        this.level++;
-        this.pointsNeededForNextlevel *= 2; // double points needed per level
-        this.feedbackMessage += "level Up!";
-      }
-    } else {
-      this.feedbackMessage = "Try again!";
-      this.backgroundColor = color(255, 0, 0); // Red for wrong
-    }
-  }
-
-  resetcirclePosition() {
-    // reset circle position to center
-    this.circle.x = 200;
-    this.circle.y = 200;
-  }
+function resetCirclePosition() {
+  circle.x = 200;
+  circle.y = 200;
 }
