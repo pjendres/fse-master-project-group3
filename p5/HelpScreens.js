@@ -35,3 +35,46 @@ class TwisterHelp extends HelpScreens{
     }
 }
 
+class SmallButtonsHelp extends HelpScreens{
+    draw() {
+        fill(0);
+        strokeWeight(0);
+        textSize(20);
+        textAlign(LEFT, CENTER);
+        text("How to play Small Buttons!", 10, height/3 - 30);
+
+        textSize(15);
+        text(
+            "       Small Buttons is a very simple game, simply tap your fingers on the buttons\n" + 
+            "before they fly away! Click all 10 and YOU WIN!\n"
+        
+         , 10, height/2);
+
+        this.drawMenuButton();
+    }
+
+    
+}
+
+class TwistingCircleHelp extends HelpScreens{
+    draw () {
+        fill(0);
+        StrokeWeight(0);
+        textSize(20);
+        textAlign(LEFT, CENTER);
+        text("How to play Twisting Circle!", 10, height/3 - 30);
+       
+        textSize(15);
+        text(
+
+        "- Follow the on-screen instructions to move the circle.\n" +
+        "- Click and drag the circle in the direction indicated.\n" +
+        "- Try to react as quickly and accurately as possible.\n\n" +
+        "Click anywhere to start!\n"
+
+        , 10, height/2);
+
+        this.drawMenuButton();
+ }
+
+    }
