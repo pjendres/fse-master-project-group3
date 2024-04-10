@@ -12,6 +12,7 @@ function setup() {
   programs.push(new TracingPath());
 
   programs.push(new TwisterHelp());
+  programs.push(new SmallButtonsHelp());
 
   //try setup
   for (let i = 0; i < programs.length; i++) {
