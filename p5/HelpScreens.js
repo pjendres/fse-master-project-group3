@@ -55,3 +55,30 @@ class SmallButtonsHelp {
         }
     }
 }
+
+class TwistingCircleHelp {
+    draw() {
+        fill(0);
+        strokeWeight(0);
+        textSize(20);
+        textAlign(LEFT, CENTER);
+        text("How to play Twisting Circle!", 10, height/3 - 30);
+        
+        textSize(15);
+        text(
+            "  Click and drag the circle in the direction indicated.\n" +
+            "- Try to react as quickly and accurately as possible.\n "
+
+            , 10, height/2);    
+        
+            textAlign(RIGHT);
+            text('Main Menu', 480, 30);
+        }
+        
+        mouseClicked() {
+            if ((mouseX < 480 && mouseX > 430) && (mouseY > 15 && mouseY < 35)) {
+                currProgram = 0;
+            }
+
+    }
+}
