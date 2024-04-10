@@ -35,3 +35,21 @@ class TwisterHelp extends HelpScreens{
     }
 }
 
+class SmallButtonsHelp extends HelpScreens{
+    draw() {
+        fill(0);
+        strokeWeight(0);
+        textSize(20);
+        textAlign(LEFT, CENTER);
+        text("How to play Small Buttons!", 10, height/3 - 30);
+
+        textSize(15);
+        text(
+            "       Small Buttons is a very simple game, simply tap your fingers on the buttons\n" + 
+            "before they fly away! Click all 10 and YOU WIN!\n"
+        
+         , 10, height/2);
+
+        this.drawMenuButton();
+    }
+}
