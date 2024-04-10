@@ -13,7 +13,8 @@ function setup() {
 
   programs.push(new TwisterHelp());
   programs.push(new SmallButtonsHelp());
-
+  programs.push(new SmallButtonsHelp());
+  
   //try setup
   for (let i = 0; i < programs.length; i++) {
     try {
