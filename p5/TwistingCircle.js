@@ -45,6 +45,10 @@ class TwistingCircle {
     // feedback message below the instructions
     text(this.feedbackMessage, width / 2, 80);
 
+    textSize(15);
+    textAlign(RIGHT);
+    text('Main Menu', 380, 30);
+
     // check for instruction update
     if (millis() > this.nextInstructionTime) {
       
@@ -56,6 +60,17 @@ class TwistingCircle {
   }
 
   mousePressed() {
+
+    if ((mouseX < 380 && mouseX > 330) && (mouseY > 15 && mouseY < 35)) {
+      this.score = 0; 
+      this.currentInstruction = 0;
+      this.level = 0;
+      this.backgroundColor = 204;
+      this.setNextInstruction();
+      this.feedbackMessage = 'Hurry up!';
+      currProgram = 0;
+    }
+
     let d = dist(mouseX, mouseY, this.circle.x, this.circle.y);
     if (d < this.circle.size / 2) {
       this.dragging = true;
@@ -64,6 +79,13 @@ class TwistingCircle {
       this.circle.startX = this.circle.x; 
       this.circle.startY = this.circle.y; 
     }
+
+
+
+  }
+  
+  mouseClicked() {
+ 
   }
 
   mouseReleased() {
