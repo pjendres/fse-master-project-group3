@@ -47,11 +47,11 @@ class SmallButtons {
             currProgram = 0;
           }
         }
-        if (this.score == 10) {
-          if ((mouseX < 370 && mouseX > 130) && (mouseY > 240 && mouseY < 280)) {
-            currProgram = 0;
-          }
-        }
+        // if (this.score == 10) {
+        //   if ((mouseX < 370 && mouseX > 130) && (mouseY > 240 && mouseY < 280)) {
+        //     currProgram = 0;
+        //   }
+        // }
     }
 
     draw() {
