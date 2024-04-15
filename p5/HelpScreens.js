@@ -40,8 +40,8 @@ class SmallButtonsHelp {
         
         textSize(15);
         text(
-            "       Small Buttons is a very simple game, simply tap your fingers on the buttons\n" + 
-            "before they fly away! Click all 10 and YOU WIN!\n"
+            "       Small Buttons is a very simple game,\n simply tap your fingers on the buttons\n" + 
+            "before they fly away!\n Click all 10 and YOU WIN!\n"
             
             , 10, height/2);    
         
