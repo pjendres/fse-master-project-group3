@@ -80,9 +80,9 @@ function draw() {
   
 //winCollison = collidePointLine(mouseX, mouseY, 100000+mazePos, 0, 100000 + mazePos, 500);
  //(test mode)
-  winCollison = collidePointLine(mouseX, mouseY, 11740 + mazePos, 0, 11740 + mazePos, 500);
+  winCollison = collidePointLine(mouseX, mouseY, 11800 +mazePos, 0, 11740 + mazePos, 500);
 
- 
+
   
   playerGuide();
   
@@ -193,7 +193,7 @@ function draw() {
   }
 
   bottomBlock();
-  if (winCollison && playerActive != 3){
+  if (winCollison && playerActive != 3 || winCollison && loseCollison){
     playerActive = 3;
    // playerTime = millis();
   }
@@ -286,6 +286,8 @@ if(playerActive == 0){
   playerActive = 1;
 } else if (playerActive == 3 && !menuCollison){
   playerActive = 0;
+  score = 0;
+  counter = 0;
 } else if (playerActive == 4){
   playerActive = 0;
 }
@@ -473,7 +475,7 @@ function gameTutorial(){
 
 
 function topBlock(){ //begin
-    loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11740, 200);
+    loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11700, 200);
 if((loseCollison) && (playerActive == 1))
   {score -= 1; counter = 0;}
   noStroke();
@@ -711,7 +713,7 @@ if ((loseCollison) && (playerActive == 1))
   
     //more poles
   rect(8980 + mazePos, 0, 2760, 20);
-        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 0, 2760, 20);
+        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 0, 2700, 20);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}
   
@@ -1062,7 +1064,7 @@ if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}  
   
     rect(8660 + mazePos, 270, 320, 170);
-    loseCollison =  collidePointRect(mouseX, mouseY,8240 + mazePos, 320, 320, 120);
+    loseCollison =  collidePointRect(mouseX, mouseY,8660 + mazePos, 270, 320, 170);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}  
   
@@ -1072,7 +1074,7 @@ if ((loseCollison) && (playerActive == 1))
   
     //more poles
   rect(8980 + mazePos, 420, 2760, 20);
-        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 420, 2760, 20);
+        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 420, 2700, 20);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}
   
