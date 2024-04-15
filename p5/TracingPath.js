@@ -40,7 +40,6 @@ draw() {
   textSize(20);
   fill(60, 255, 0);
 
-  console.log(this.playerActive);
   if (this.playerActive == 0){ //startPos
     this.instructionText = "Click to begin!";
     this.dscore = 1;
@@ -48,6 +47,7 @@ draw() {
     this.backgroundMusic.stop();
     this.mazePos = 0;
   } 
+
   else if (this.playerActive == 1) { //playing
     console.log("play")
     this.instructionText = "press r to restart, p or click to pause";
@@ -63,13 +63,15 @@ draw() {
  //  a.position(0, 1000);
   //  b.position(0, 1000);
     if (this.backgroundMusic.isPlaying() == false){
-    this.backgroundMusic.play(); 
+      this.backgroundMusic.play(); 
 
-  }
-  } else if (this.playerActive == 2){ //paused
+    }
+  } 
+  else if (this.playerActive == 2){ //paused
     this.instructionText = "Click to continue playing!";
     this.backgroundMusic.pause();
-  } else if (this.playerActive == 4){
+  } 
+  else if (this.playerActive == 4){
     this.instructionText = "Click to proceed";
    // gameTutorial();
   }
@@ -81,13 +83,14 @@ draw() {
   
   this.playerGuide();
   
-  this.createPlayer();
+  this.createplayer();
   
 //creating the blocks
   this.topBlock();
   fill(0);
   text("press esc at any time to return to menu", 10, 30);
 
+  //this part of code unreached when game starts
   this.bottomBlock();
   if (this.winCollison && this.playerActive != 3){
     this.playerActive = 3;
@@ -97,20 +100,22 @@ draw() {
   fill(50, 196, 240);
   rect(490, 30, 190, 125);
   fill(0);
+  
   //score indicator
-    text("score: ", 500, 50);
+  text("score: ", 500, 50);
   text(this.score, 600, 50);
   text("x", 500, 100);
   //multiplier
   text(this.multiplier, 515, 100);
   //target score
-  if (this.score < 22000)
-  text("target: ", 500, 150);
-  if (this.score < 5750){
+  if (this.score < 22000) text("target: ", 500, 150);
+  if (this.score < 5750) {
     text("5750", 600, 150);
-  } else if (this.score < 10500){
+  } 
+  else if (this.score < 10500) {
     text("10500", 600, 150);
-  } else if (this.score < 22000){
+  } 
+  else if (this.score < 22000) {
     text("22000", 600, 150);
   }
   
@@ -122,9 +127,6 @@ draw() {
   }
 
 
-    
-  
-  
   if (this.counter >= 10000){
     this.multiplier = 10;  
     fill(0);
@@ -167,7 +169,6 @@ draw() {
 
   //working
   if (this.playerActive == 4){
-    
     this.gameTutorial();
   }
 
@@ -225,23 +226,35 @@ returnToMenu(){
 victoryRoyale(){
   if(this.score > 5750){
     this.instructionText = "You won! Press r to restart, esc to exit";
-  } else {
+  } 
+  else {
     this.instructionText = "Try again. You got this.";
   }
   this.backgroundMusic.stop();
+  
+
   fill(255);
   rect(100, 100, 500, 300);
   textSize(30);
   fill(37, 92, 17);
-  if (this.score > 22000){
-  text("Flawless!", 275, 150); } else if (this.score > 10500) {text("Great job!", 275, 150);}
-  else if (this.score > 5750) {text("Not bad!", 175, 150);} else {text("Try again!", 175, 150);}
+  if (this.score > 22000) {
+    text("Flawless!", 275, 150); 
+  } 
+  else if (this.score > 10500) {
+    text("Great job!", 275, 150);
+  }
+  else if (this.score > 5750) {
+    text("Not bad!", 175, 150);
+  } 
+  else {
+    text("Try again!", 175, 150);
+  }
+
   fill(227, 252, 0);
   rect(150, 175, 150, 75);
   textSize(20);
   fill(0);
-
-   text("Score:", 165, 195);
+  text("Score:", 165, 195);
   text(this.score, 185, 215);
   
   if (this.best < this.score || this.best == 0){
@@ -324,7 +337,7 @@ playerGuide(){
 }
 
 //working
-createPlayer(){
+createplayer(){
   
     //player
   fill(66, 182, 245);
@@ -353,7 +366,7 @@ gameTutorial(){
 
 
 
-
+//seems to stop rendering when the game starts
 topBlock(){ //begin
     this.loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11740, 200);
 if((this.loseCollison) && (this.playerActive == 1))
@@ -375,70 +388,70 @@ if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(70*2 + this.mazePos, 30*4, 80*2 + this.mazePos, 30*4, 80*2 + this.mazePos, 40*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,70*2 + this.mazePos, 30*4, 80*2 + this.mazePos, 30*4, 80*2 + this.mazePos, 40*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   rect(120*2 + this.mazePos, 40*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 120*2 + this.mazePos, 40*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   rect(80*2 + this.mazePos,30*4,150*2,10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 80*2 + this.mazePos,30*4,150*2,10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   triangle(230*2 + this.mazePos, 30*4, 230*2 + this.mazePos, 40*4, 240*2 + this.mazePos, 30*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,230*2 + this.mazePos, 30*4, 230*2 + this.mazePos, 40*4, 240*2 + this.mazePos, 30*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(250*2 + this.mazePos, 30*4, 260*2 + this.mazePos, 30*4, 260*2 + this.mazePos, 40*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,250*2 + this.mazePos, 30*4, 260*2 + this.mazePos, 30*4, 260*2 + this.mazePos, 40*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   rect(330*2 + this.mazePos, 40*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 330*2 + this.mazePos, 40*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   rect(260*2 + this.mazePos, 30*4, 150*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 260*2 + this.mazePos, 30*4, 150*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(410*2 + this.mazePos, 30*4, 410*2 + this.mazePos, 40*4, 420*2 + this.mazePos, 30*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  410*2 + this.mazePos, 30*4, 410*2 + this.mazePos, 40*4, 420*2 + this.mazePos, 30*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(430*2 + this.mazePos, 30*4, 440*2 + this.mazePos, 30*4, 440*2 + this.mazePos, 40*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,430*2 + this.mazePos, 30*4, 440*2 + this.mazePos, 30*4, 440*2 + this.mazePos, 40*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(500*2 + this.mazePos, 40*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 500*2 + this.mazePos, 40*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(440*2 + this.mazePos, 30*4, 140*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 440*2 + this.mazePos, 30*4, 140*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(580*2 + this.mazePos, 30*4, 590*2 + this.mazePos, 30*4, 580*2 + this.mazePos, 40*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  580*2 + this.mazePos, 30*4, 590*2 + this.mazePos, 30*4, 580*2 + this.mazePos, 40*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(600*2 + this.mazePos, 30*4, 610*2 + this.mazePos, 30*4, 610*2 + this.mazePos, 40*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  600*2 + this.mazePos, 30*4, 610*2 + this.mazePos, 30*4, 610*2 + this.mazePos, 40*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(610*2 + this.mazePos, 30*4, 140*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 610*2 + this.mazePos, 30*4, 140*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(640*2 + this.mazePos, 40*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 640*2 + this.mazePos, 40*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   
@@ -448,23 +461,23 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 //maze
   rect(1500 + this.mazePos, 0, 1420, 40);
     this.loseCollison =  collidePointRect(mouseX, mouseY,1500 + this.mazePos, 0, 1500, 40);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(1800+this.mazePos, 40, 280, 150);
     this.loseCollison =  collidePointRect(mouseX, mouseY,1800+this.mazePos, 40, 280, 150);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
 rect(2360+this.mazePos, 40, 260, 150);
     this.loseCollison =  collidePointRect(mouseX, mouseY,2360+this.mazePos, 40, 260, 150);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 //rect(2920 + this.mazePos, 40, 80, 150);
  //   loseCollison =  collidePointRect(mouseX, mouseY,2920 + this.mazePos, 40, 80, 150);
-//if ((loseCollison) && (this.PlayerActive == 1)){score -= 5; counter = 0;}
+//if ((loseCollison) && (this.playerActive == 1)){score -= 5; counter = 0;}
   
   
   
@@ -475,32 +488,32 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
   //zigzag
 triangle(2920 + this.mazePos, 0, 2920 + this.mazePos, 130, 3260 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,2920 + this.mazePos, 0, 2920 + this.mazePos, 130, 3260 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 triangle(3260 + this.mazePos, 0, 3600 + this.mazePos, 0, 3600 + this.mazePos, 130);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 3260 + this.mazePos, 0, 3600 + this.mazePos, 0, 3600 + this.mazePos, 130);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(3600 + this.mazePos, 0, 3600 + this.mazePos, 130, 3940 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,3600 + this.mazePos, 0, 3600 + this.mazePos, 130, 3940 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 triangle(3940 + this.mazePos, 0, 4280 + this.mazePos, 0, 4280 + this.mazePos, 130);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 3940 + this.mazePos, 0, 4280 + this.mazePos, 0, 4280 + this.mazePos, 130);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 triangle(4280 + this.mazePos, 0, 4280 + this.mazePos, 130, 4620 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,4280 + this.mazePos, 0, 4280 + this.mazePos, 130, 4620 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 triangle(4620 + this.mazePos, 0, 4960 + this.mazePos, 0, 4960 + this.mazePos, 130);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,4620 + this.mazePos, 0, 4960 + this.mazePos, 0, 4960 + this.mazePos, 130);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   
@@ -512,7 +525,7 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
   //tunnel
   rect(4960 + this.mazePos, 0, 300, 130);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 4960 + this.mazePos, 0, 300, 130);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   
@@ -523,44 +536,44 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 //pole
 rect(5580 + this.mazePos, 0, 20, 190);
   this.loseCollison =  collidePointRect(mouseX, mouseY,5580 + this.mazePos, 0, 20, 190);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 
 rect(5880 + this.mazePos, 0, 20, 310);
   this.loseCollison =  collidePointRect(mouseX, mouseY,5880 + this.mazePos, 0, 20, 310);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 
 rect(6240 + this.mazePos, 0, 20, 190);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6240 + this.mazePos, 0, 20, 190);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(6540 + this.mazePos, 0, 20, 150);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6540 + this.mazePos, 0, 20, 150);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(6880 + this.mazePos, 0, 20, 30);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6880 + this.mazePos, 0, 20, 30);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(7180 + this.mazePos, 0, 20, 150);
   this.loseCollison =  collidePointRect(mouseX, mouseY,7180 + this.mazePos, 0, 20, 150);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(7560 + this.mazePos, 0, 20, 300);
   this.loseCollison =  collidePointRect(mouseX, mouseY,7560 + this.mazePos, 0, 20, 300);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(5260 + this.mazePos, 0, 2300, 20);
     this.loseCollison =  collidePointRect(mouseX, mouseY,5260 + this.mazePos, 0, 2300, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   
@@ -572,17 +585,17 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
   //shrinking tunnel
   rect(7560 + this.mazePos, 0, 680, 20);
     this.loseCollison =  collidePointRect(mouseX, mouseY,7560 + this.mazePos, 0, 680, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(8240 + this.mazePos, 0, 420, 120);
     this.loseCollison =  collidePointRect(mouseX, mouseY,8240 + this.mazePos, 0, 420, 120);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(8660 + this.mazePos, 0, 320, 170);
       this.loseCollison =  collidePointRect(mouseX, mouseY,8660 + this.mazePos, 0, 320, 170);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   
@@ -594,47 +607,47 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
     //more poles
   rect(8980 + this.mazePos, 0, 2760, 20);
         this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 0, 2760, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(9120 + this.mazePos, 0, 20, 80);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9120 + this.mazePos, 0, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(9260 + this.mazePos, 0, 20, 160);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9260 + this.mazePos, 0, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9400 + this.mazePos, 0, 20, 200);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9400 + this.mazePos, 0, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9540 + this.mazePos, 0, 20, 160);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9540 + this.mazePos, 0, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9680 + this.mazePos, 0, 20, 80);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9680 + this.mazePos, 0, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9820 + this.mazePos, 0, 20, 160);
       this.loseCollison =  collidePointRect(mouseX, mouseY,9820 + this.mazePos, 0, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
       rect(9960 + this.mazePos, 0, 20, 200);
       this.loseCollison =  collidePointRect(mouseX, mouseY,9960 + this.mazePos, 0, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
       rect(10100 + this.mazePos, 0, 20, 300);
       this.loseCollison =  collidePointRect(mouseX, mouseY,10100 + this.mazePos, 0, 20, 300);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   
@@ -645,42 +658,42 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
   //zigzag (final part)
     triangle(10420 + this.mazePos, 220, 10560 + this.mazePos, 0, 10420 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,10420 + this.mazePos, 220, 10560 + this.mazePos, 0, 10420 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     triangle(10560 + this.mazePos, 0, 10700 + this.mazePos, 0, 10700 + this.mazePos, 220);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,10560 + this.mazePos, 0, 10700 + this.mazePos, 0, 10700 + this.mazePos, 220);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   triangle(10700 + this.mazePos, 0, 10700 + this.mazePos, 220, 10900 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,10700 + this.mazePos, 0, 10700 + this.mazePos, 220, 10900 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(10900 + this.mazePos, 0, 11100 + this.mazePos, 0, 11100 + this.mazePos, 220);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,10900 + this.mazePos, 0, 11100 + this.mazePos, 0, 11100 + this.mazePos, 220);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(11280 + this.mazePos, 0, 11460 + this.mazePos, 220, 11460 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 11280 + this.mazePos, 0, 11460 + this.mazePos, 220, 11460 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(11100 + this.mazePos, 0, 11100 + this.mazePos, 220, 11280 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,11100 + this.mazePos, 0, 11100 + this.mazePos, 220, 11280 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(11460 + this.mazePos, 0, 11460 + this.mazePos, 220, 11600 + this.mazePos, 0);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 11460 + this.mazePos, 0, 11460 + this.mazePos, 220, 11600 + this.mazePos, 0);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     triangle(11600 + this.mazePos, 0, 11740 + this.mazePos, 0, 11740 + this.mazePos, 220);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 11600 + this.mazePos, 0, 11740 + this.mazePos, 0, 11740 + this.mazePos, 220);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 }
 
@@ -689,112 +702,115 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 
 
 bottomBlock(){ //begin
+  console.log("bottom block")
   fill(84, 245, 66); //bottom
   rect(0 + this.mazePos, 80*4, 750*2, 30*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 0 + this.mazePos, 80*4, 750*2, 30*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
-{this.score -= 1; this.counter = 0;}
+
+if ((this.loseCollison) && (this.playerActive == 1)) {
+  this.score -= 1; this.counter = 0;
+}
   
   rect(0 + this.mazePos, 70*4, 50*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 0 + this.mazePos, 70*4, 50*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(50*2 + this.mazePos, 70*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 50*2 + this.mazePos, 70*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(50*2 + this.mazePos, 70*4, 60*2 + this.mazePos, 70*4, 60*2 + this.mazePos, 60*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  50*2 + this.mazePos, 70*4, 60*2 + this.mazePos, 70*4, 60*2 + this.mazePos, 60*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(70*2 + this.mazePos, 60*4, 70*2 + this.mazePos, 70*4, 80*2 + this.mazePos, 70*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  70*2 + this.mazePos, 60*4, 70*2 + this.mazePos, 70*4, 80*2 + this.mazePos, 70*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   rect(60*2 + this.mazePos, 60*4, 10*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 60*2 + this.mazePos, 60*4, 10*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(80*2 + this.mazePos, 70*4, 40*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 80*2 + this.mazePos, 70*4, 40*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(120*2 + this.mazePos, 70*4, 120*2 + this.mazePos, 80*4, 130*2 + this.mazePos, 80*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  120*2 + this.mazePos, 70*4, 120*2 + this.mazePos, 80*4, 130*2 + this.mazePos, 80*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(140*2 + this.mazePos, 80*4, 150*2 + this.mazePos, 80*4, 150*2 + this.mazePos, 70*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  140*2 + this.mazePos, 80*4, 150*2 + this.mazePos, 80*4, 150*2 + this.mazePos, 70*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(150*2 + this.mazePos, 70*4, 180*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 150*2 + this.mazePos, 70*4, 180*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(230*2 + this.mazePos, 60*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 230*2 + this.mazePos, 60*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(330*2 + this.mazePos, 70*4, 330*2 + this.mazePos, 4*80, 2*340 + this.mazePos, 4*80);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  330*2 + this.mazePos, 70*4, 330*2 + this.mazePos, 4*80, 2*340 + this.mazePos, 4*80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(350*2 + this.mazePos, 80*4, 360*2 + this.mazePos, 80*4, this.mazePos + 360*2, 70*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  350*2 + this.mazePos, 80*4, 360*2 + this.mazePos, 80*4, this.mazePos + 360*2, 70*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(360*2 + this.mazePos, 70*4, 140*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 360*2 + this.mazePos, 70*4, 140*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(410*2 + this.mazePos, 60*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 410*2 + this.mazePos, 60*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
   triangle(500*2 + this.mazePos, 70*4, 500*2 + this.mazePos, 80*4, 510*2 + this.mazePos, 80*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  500*2 + this.mazePos, 70*4, 500*2 + this.mazePos, 80*4, 510*2 + this.mazePos, 80*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   triangle(520*2 + this.mazePos, 80*4, 530*2 + this.mazePos, 80*4, 530*2 + this.mazePos, 70*4); 
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  520*2 + this.mazePos, 80*4, 530*2 + this.mazePos, 80*4, 530*2 + this.mazePos, 70*4); 
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(530*2 + this.mazePos, 70*4, 110*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 530*2 + this.mazePos, 70*4, 110*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(580*2 + this.mazePos, 60*4, 30*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 580*2 + this.mazePos, 60*4, 30*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(640*2 + this.mazePos, 70*4, 640*2 + this.mazePos, 80*4, 650*2 + this.mazePos, 80*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  640*2 + this.mazePos, 70*4, 640*2 + this.mazePos, 80*4, 650*2 + this.mazePos, 80*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   triangle(660*2 + this.mazePos, 80*4, 670*2 + this.mazePos, 80*4, 670*2 + this.mazePos, 70*4);
   this.loseCollison = collidePointTriangle(mouseX, mouseY,  660*2 + this.mazePos, 80*4, 670*2 + this.mazePos, 80*4, 670*2 + this.mazePos, 70*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(670*2 + this.mazePos, 70*4, 80*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 670*2 + this.mazePos, 70*4, 80*2, 10*4);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
@@ -803,23 +819,23 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 //maze
   rect(1500 + this.mazePos, 280, 1420, 160);
   this.loseCollison =  collidePointRect(mouseX, mouseY,1500 + this.mazePos, 280, 1420, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
 rect(1600 + this.mazePos, 120, 80, 160);
     this.loseCollison =  collidePointRect(mouseX, mouseY,1600 + this.mazePos, 120, 80, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 rect(2190 + this.mazePos, 120, 80, 160);
     this.loseCollison =  collidePointRect(mouseX, mouseY,2190 + this.mazePos, 120, 80, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 rect(2740 + this.mazePos, 120, 80, 160);
       this.loseCollison =  collidePointRect(mouseX, mouseY,2740 + this.mazePos, 120, 80, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
@@ -828,38 +844,38 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 //zigzag
 triangle(2920 + this.mazePos, 280, 3260 + this.mazePos, 280, 3260 + this.mazePos, 110);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,  2920 + this.mazePos, 280, 3260 + this.mazePos, 280, 3260 + this.mazePos, 110);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(3260 + this.mazePos, 280, 3260 + this.mazePos, 110, 3600 + this.mazePos, 280);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,  3260 + this.mazePos, 280, 3260 + this.mazePos, 110, 3600 + this.mazePos, 280);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(3600 + this.mazePos, 280, 3940 + this.mazePos, 280, 3940 + this.mazePos, 110);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,  3600 + this.mazePos, 280, 3940 + this.mazePos, 280, 3940 + this.mazePos, 110);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(3940 + this.mazePos, 280, 3940 + this.mazePos, 110, 4280 + this.mazePos, 280);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,  3940 + this.mazePos, 280, 3940 + this.mazePos, 110, 4280 + this.mazePos, 280);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
 triangle(4280 + this.mazePos, 280, 4620 + this.mazePos, 280, 4620 + this.mazePos, 110);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,4280 + this.mazePos, 280, 4620 + this.mazePos, 280, 4620 + this.mazePos, 110);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(4620 + this.mazePos, 280, 4620 + this.mazePos, 110, 4960 + this.mazePos, 280);
     this.loseCollison = collidePointTriangle(mouseX, mouseY,4620 + this.mazePos, 280, 4620 + this.mazePos, 110, 4960 + this.mazePos, 280);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(2920 + this.mazePos, 280, 2040, 160);
       this.loseCollison =  collidePointRect(mouseX, mouseY,2920 + this.mazePos, 280, 2040, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
 
@@ -867,68 +883,68 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
 //tunnel
 rect(4960 + this.mazePos, 280, 300, 160);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 4960 + this.mazePos, 280, 300, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 //pole
 rect(5580 + this.mazePos, 240, 20, 200);
   this.loseCollison =  collidePointRect(mouseX, mouseY,5580 + this.mazePos, 240, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 
 rect(5880 + this.mazePos, 360, 20, 80);
   this.loseCollison =  collidePointRect(mouseX, mouseY,5880 + this.mazePos, 360, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 
 rect(6240 + this.mazePos, 240, 20, 200);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6240 + this.mazePos, 240, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(6540 + this.mazePos, 200, 20, 240);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6540 + this.mazePos, 240, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(6880 + this.mazePos, 80, 20, 360);
   this.loseCollison =  collidePointRect(mouseX, mouseY,6880 + this.mazePos, 80, 20, 360);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(7180 + this.mazePos, 240, 20, 200);
   this.loseCollison =  collidePointRect(mouseX, mouseY,7180 + this.mazePos, 240, 20, 200);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(7560 + this.mazePos, 360, 20, 80);
   this.loseCollison =  collidePointRect(mouseX, mouseY,7560 + this.mazePos, 360, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(5260 + this.mazePos, 420, 2300, 20);
     this.loseCollison =  collidePointRect(mouseX, mouseY,5260 + this.mazePos, 420, 2300, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   //shrinking tunnel
   
     rect(7560 + this.mazePos, 420, 680, 20);
     this.loseCollison =  collidePointRect(mouseX, mouseY,7560 + this.mazePos, 420, 680, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   
     rect(8240 + this.mazePos, 320, 420, 120);
     this.loseCollison =  collidePointRect(mouseX, mouseY,8240 + this.mazePos, 320, 420, 120);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   
     rect(8660 + this.mazePos, 270, 320, 170);
     this.loseCollison =  collidePointRect(mouseX, mouseY,8240 + this.mazePos, 320, 320, 120);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   
   
@@ -938,42 +954,42 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
     //more poles
   rect(8980 + this.mazePos, 420, 2760, 20);
         this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 420, 2760, 20);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(9120 + this.mazePos, 340, 20, 80);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9120 + this.mazePos, 340, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
   rect(9260 + this.mazePos, 260, 20, 160);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9260 + this.mazePos, 260, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9400 + this.mazePos, 240, 20, 180);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9400 + this.mazePos, 240, 20, 180);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9540 + this.mazePos, 260, 20, 160);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9540 + this.mazePos, 260, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9680 + this.mazePos, 340, 20, 80);
         this.loseCollison =  collidePointRect(mouseX, mouseY,9680 + this.mazePos, 340, 20, 80);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
     rect(9820 + this.mazePos, 260, 20, 160);
       this.loseCollison =  collidePointRect(mouseX, mouseY,9820 + this.mazePos, 260, 20, 160);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
       rect(9960 + this.mazePos, 240, 20, 180);
       this.loseCollison =  collidePointRect(mouseX, mouseY,9960 + this.mazePos, 240, 20, 180);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 
@@ -985,22 +1001,22 @@ if ((this.loseCollison) && (this.PlayerActive == 1))
   
   triangle(10420 + this.mazePos, 420, 10560 + this.mazePos, 220, 10700 + this.mazePos, 420);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 10420 + this.mazePos, 420, 10560 + this.mazePos, 220, 10700 + this.mazePos, 420);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(10700 + this.mazePos, 420, 10900 + this.mazePos, 220, 11100 + this.mazePos, 420);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 10700 + this.mazePos, 420, 10900 + this.mazePos, 220, 11100 + this.mazePos, 420);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(11100 + this.mazePos, 420, 11280 + this.mazePos, 220, 11460 + this.mazePos, 420);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 11100 + this.mazePos, 420, 11280 + this.mazePos, 220, 11460 + this.mazePos, 420);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
 triangle(11460 + this.mazePos, 420, 11600 + this.mazePos, 220, 11740 + this.mazePos, 420);
     this.loseCollison = collidePointTriangle(mouseX, mouseY, 11460 + this.mazePos, 420, 11600 + this.mazePos, 220, 11740 + this.mazePos, 420);
-if ((this.loseCollison) && (this.PlayerActive == 1))
+if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 }
 }
