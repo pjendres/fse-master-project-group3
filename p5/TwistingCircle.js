@@ -79,9 +79,6 @@ class TwistingCircle {
       this.circle.startX = this.circle.x; 
       this.circle.startY = this.circle.y; 
     }
-
-
-
   }
   
 

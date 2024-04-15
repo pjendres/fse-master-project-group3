@@ -33,6 +33,18 @@ function draw() {
   } catch {}
 }
 
+function preLoad() {
+  try {
+    programs[currProgram].preLoad();
+  } catch {}
+} 
+
+function keyPressed(keyCode) {
+  try {
+    programs[currProgram].keyPressed(keyCode);
+  } catch {}
+}
+
 //mouse functions
 function mouseClicked() {
   //try mouse
