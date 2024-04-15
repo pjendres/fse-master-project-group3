@@ -84,9 +84,6 @@ class TwistingCircle {
 
   }
   
-  mouseClicked() {
- 
-  }
 
   mouseReleased() {
     this.dragging = false;
