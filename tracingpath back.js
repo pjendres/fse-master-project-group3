@@ -80,9 +80,9 @@ function draw() {
   
 //winCollison = collidePointLine(mouseX, mouseY, 100000+mazePos, 0, 100000 + mazePos, 500);
  //(test mode)
-  winCollison = collidePointLine(mouseX, mouseY, 11740 + mazePos, 0, 11740 + mazePos, 500);
+  winCollison = collidePointLine(mouseX, mouseY, 11800 +mazePos, 0, 11740 + mazePos, 500);
 
- 
+
   
   playerGuide();
   
@@ -95,9 +95,105 @@ function draw() {
   topBlock();
   fill(0);
   text("press esc at any time to return to menu", 10, 30);
+    noFill();
+  stroke(0);
+
+  beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(20, 70);
+  vertex(25, 65); 
+  vertex(30, 70); 
+  vertex(40, 70); 
+  vertex(35, 75); 
+  vertex(35, 80); 
+  vertex(25, 75); 
+  vertex(13, 80); 
+  vertex(15, 75); 
+  vertex(10, 70); 
+  vertex(20, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+ 
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(50, 70);
+  vertex(55, 65); 
+  vertex(60, 70); 
+  vertex(70, 70); 
+  vertex(65, 75); 
+  vertex(65, 80); 
+  vertex(55, 75); 
+  vertex(43, 80); 
+  vertex(45, 75); 
+  vertex(40, 70); 
+  vertex(50, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+  
+
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(80, 70);
+  vertex(85, 65); 
+  vertex(90, 70); 
+  vertex(100, 70); 
+  vertex(95, 75); 
+  vertex(95, 80); 
+  vertex(85, 75); 
+  vertex(73, 80); 
+  vertex(75, 75); 
+  vertex(70, 70); 
+  vertex(80, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+  noStroke();
+    fill("yellow"); 
+  if (score > 5500){
+  beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(20, 70);
+  vertex(25, 65); 
+  vertex(30, 70); 
+  vertex(40, 70); 
+  vertex(35, 75); 
+  vertex(35, 80); 
+  vertex(25, 75); 
+  vertex(13, 80); 
+  vertex(15, 75); 
+  vertex(10, 70); 
+  vertex(20, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
+  if (score > 10500){
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(50, 70);
+  vertex(55, 65); 
+  vertex(60, 70); 
+  vertex(70, 70); 
+  vertex(65, 75); 
+  vertex(65, 80); 
+  vertex(55, 75); 
+  vertex(43, 80); 
+  vertex(45, 75); 
+  vertex(40, 70); 
+  vertex(50, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
+  
+  if (score > 22000){
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(80, 70);
+  vertex(85, 65); 
+  vertex(90, 70); 
+  vertex(100, 70); 
+  vertex(95, 75); 
+  vertex(95, 80); 
+  vertex(85, 75); 
+  vertex(73, 80); 
+  vertex(75, 75); 
+  vertex(70, 70); 
+  vertex(80, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
 
   bottomBlock();
-  if (winCollison && playerActive != 3){
+  if (winCollison && playerActive != 3 || winCollison && loseCollison){
     playerActive = 3;
    // playerTime = millis();
   }
@@ -190,6 +286,8 @@ if(playerActive == 0){
   playerActive = 1;
 } else if (playerActive == 3 && !menuCollison){
   playerActive = 0;
+  score = 0;
+  counter = 0;
 } else if (playerActive == 4){
   playerActive = 0;
 }
@@ -377,7 +475,7 @@ function gameTutorial(){
 
 
 function topBlock(){ //begin
-    loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11740, 200);
+    loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11700, 200);
 if((loseCollison) && (playerActive == 1))
   {score -= 1; counter = 0;}
   noStroke();
@@ -615,7 +713,7 @@ if ((loseCollison) && (playerActive == 1))
   
     //more poles
   rect(8980 + mazePos, 0, 2760, 20);
-        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 0, 2760, 20);
+        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 0, 2700, 20);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}
   
@@ -966,7 +1064,7 @@ if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}  
   
     rect(8660 + mazePos, 270, 320, 170);
-    loseCollison =  collidePointRect(mouseX, mouseY,8240 + mazePos, 320, 320, 120);
+    loseCollison =  collidePointRect(mouseX, mouseY,8660 + mazePos, 270, 320, 170);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}  
   
@@ -976,7 +1074,7 @@ if ((loseCollison) && (playerActive == 1))
   
     //more poles
   rect(8980 + mazePos, 420, 2760, 20);
-        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 420, 2760, 20);
+        loseCollison =  collidePointRect(mouseX, mouseY,8980 + mazePos, 420, 2700, 20);
 if ((loseCollison) && (playerActive == 1))
 {score -= 1; counter = 0;}
   
