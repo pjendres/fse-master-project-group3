@@ -45,8 +45,6 @@ constructor() {
       this.counter += 10;
     }
 
-
-
     
     fill(47, 255, 0);
  //  a.position(0, 1000);
