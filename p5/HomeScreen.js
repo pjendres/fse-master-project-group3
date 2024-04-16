@@ -1,9 +1,5 @@
 
-//load image
-let handImage;
-function preload() {
-  handImage = loadImage('hand.png');
-}
+
 
 //class for homescreen program
 class HomeScreen {

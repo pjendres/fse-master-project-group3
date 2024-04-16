@@ -1,3 +1,11 @@
+//load image
+let handImage;
+function preload() {
+  handImage = loadImage('hand.png');
+  soundFormats("mp3");
+  backgroundMusic = loadSound("1168412-Time-Machine-2.mp3");
+}
+
 let currProgram = 0;
 let programs = [];
 
@@ -33,11 +41,6 @@ function draw() {
   } catch {}
 }
 
-function preLoad() {
-  try {
-    programs[currProgram].preLoad();
-  } catch {}
-} 
 
 function keyPressed(keyCode) {
   try {

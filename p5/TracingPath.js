@@ -3,39 +3,29 @@
 //  <script defer src="https://unpkg.com/p5.collide2d"></script> 
 
 // it also has music which I have included in the file. 
-
-
 class TracingPath {
 
 constructor() {
-    this.instructionText;
-    this.playerX = 0;
-    this.playerY = 0;
-    
-    this.playerActive = 4; //0 means stop, 1 means playing, 2 means paused. 
-    this.mazePos = 0;
-    this.winCollison = false;
-    this.loseCollison = false;
-    this.replayCollison;
-    this.menuCollison;
-    this.score = 0;
-    this.dscore = 1;
-    this.best = 0;
-    this.multiplier = 1;
-    this.counter = 0;
+  this.playerX = 0;
+  this.playerY = 0;
+  this.instructionText;
+  this.playerActive = 4; //0 means stop, 1 means playing, 2 means paused. 
+  this.mazePos = 0;
+  this.winCollison;
+  this.loseCollison = false;
+  this.replayCollison = false;
+  this.menuCollison;
+  this.score = 0;
+  this.dscore = 1;
+  this.best = 0;
+  this.multiplier = 1;
+  this.counter = 0;
 }
 
 
-preload(){ //loadmusic
-  soundFormats("mp3");
-  this.backgroundMusic = loadSound("1168412-Time-Machine-2.mp3");
-}
-
-setup() {
-}
-
-draw() {
-  resizeCanvas(700, 500);
+ draw() {
+  resizeCanvas(700,500);
+  
   background(100);
   textSize(20);
   fill(60, 255, 0);
@@ -44,12 +34,9 @@ draw() {
     this.instructionText = "Click to begin!";
     this.dscore = 1;
     this.score = 0;
-    this.backgroundMusic.stop();
+    backgroundMusic.stop();
     this.mazePos = 0;
-  } 
-
-  else if (this.playerActive == 1) { //playing
-    console.log("play")
+  } else if (this.playerActive == 1) { //playing
     this.instructionText = "press r to restart, p or click to pause";
     this.mazePos -= 3.8;
     this.score += this.dscore*this.multiplier;
@@ -58,68 +45,165 @@ draw() {
       this.counter += 10;
     }
 
+
+
     
     fill(47, 255, 0);
  //  a.position(0, 1000);
   //  b.position(0, 1000);
-    if (this.backgroundMusic.isPlaying() == false){
-      this.backgroundMusic.play(); 
+    if (backgroundMusic.isPlaying() == false){
+    backgroundMusic.play(); 
 
-    }
-  } 
-  else if (this.playerActive == 2){ //paused
+}
+  } else if (this.playerActive == 2){ //paused
     this.instructionText = "Click to continue playing!";
-    this.backgroundMusic.pause();
-  } 
-  else if (this.playerActive == 4){
+    backgroundMusic.pause();
+  } else if (this.playerActive == 4){
     this.instructionText = "Click to proceed";
    // gameTutorial();
   }
   
-//winCollison = collidePointLine(mouseX, mouseY, 100000+this.mazePos, 0, 100000 + this.mazePos, 500);
+//winCollison = collidePointLine(mouseX, mouseY, 100000+mazePos, 0, 100000 + mazePos, 500);
  //(test mode)
-  this.winCollison = collidePointLine(mouseX, mouseY, 11740 + this.mazePos, 0, 11740 + this.mazePos, 500);
+  this.winCollison = collidePointLine(mouseX, mouseY, 11800 +this.mazePos, 0, 11740 + this.mazePos, 500);
+
 
   
   this.playerGuide();
   
-  this.createplayer();
+  this.createPlayer();
+
   
-//creating the blocks
+
+  
+  //creating the blocks
   this.topBlock();
   fill(0);
   text("press esc at any time to return to menu", 10, 30);
+    noFill();
+  stroke(0);
 
-  //this part of code unreached when game starts
+  beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(20, 70);
+  vertex(25, 65); 
+  vertex(30, 70); 
+  vertex(40, 70); 
+  vertex(35, 75); 
+  vertex(35, 80); 
+  vertex(25, 75); 
+  vertex(13, 80); 
+  vertex(15, 75); 
+  vertex(10, 70); 
+  vertex(20, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+ 
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(50, 70);
+  vertex(55, 65); 
+  vertex(60, 70); 
+  vertex(70, 70); 
+  vertex(65, 75); 
+  vertex(65, 80); 
+  vertex(55, 75); 
+  vertex(43, 80); 
+  vertex(45, 75); 
+  vertex(40, 70); 
+  vertex(50, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+  
+
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(80, 70);
+  vertex(85, 65); 
+  vertex(90, 70); 
+  vertex(100, 70); 
+  vertex(95, 75); 
+  vertex(95, 80); 
+  vertex(85, 75); 
+  vertex(73, 80); 
+  vertex(75, 75); 
+  vertex(70, 70); 
+  vertex(80, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  
+  noStroke();
+    fill("yellow"); 
+  if (this.score > 5500){
+  beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(20, 70);
+  vertex(25, 65); 
+  vertex(30, 70); 
+  vertex(40, 70); 
+  vertex(35, 75); 
+  vertex(35, 80); 
+  vertex(25, 75); 
+  vertex(13, 80); 
+  vertex(15, 75); 
+  vertex(10, 70); 
+  vertex(20, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
+  if (this.score > 10500){
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(50, 70);
+  vertex(55, 65); 
+  vertex(60, 70); 
+  vertex(70, 70); 
+  vertex(65, 75); 
+  vertex(65, 80); 
+  vertex(55, 75); 
+  vertex(43, 80); 
+  vertex(45, 75); 
+  vertex(40, 70); 
+  vertex(50, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
+  
+  if (this.score > 22000){
+   beginShape(); //tells p5 we are starting a custom shape with the following points. 
+  vertex(80, 70);
+  vertex(85, 65); 
+  vertex(90, 70); 
+  vertex(100, 70); 
+  vertex(95, 75); 
+  vertex(95, 80); 
+  vertex(85, 75); 
+  vertex(73, 80); 
+  vertex(75, 75); 
+  vertex(70, 70); 
+  vertex(80, 70); 
+  endShape(); //tells p5 to stop drawing a custom shape between the points.
+  }
+
   this.bottomBlock();
-  if (this.winCollison && this.playerActive != 3){
+  if (this.winCollison && this.playerActive != 3 || this.winCollison && this.loseCollison){
     this.playerActive = 3;
-  // playerTime = millis();
+   // playerTime = millis();
   }
   //blue box
   fill(50, 196, 240);
   rect(490, 30, 190, 125);
   fill(0);
-  
   //score indicator
-  text("score: ", 500, 50);
+    text("score: ", 500, 50);
   text(this.score, 600, 50);
   text("x", 500, 100);
   //multiplier
   text(this.multiplier, 515, 100);
   //target score
-  if (this.score < 22000) text("target: ", 500, 150);
-  if (this.score < 5750) {
+  if (this.score < 22000)
+  text("target: ", 500, 150);
+  if (this.score < 5750){
     text("5750", 600, 150);
-  } 
-  else if (this.score < 10500) {
+  } else if (this.score < 10500){
     text("10500", 600, 150);
-  } 
-  else if (this.score < 22000) {
+  } else if (this.score < 22000){
     text("22000", 600, 150);
   }
   
-  if (this.playerActive == 3){
+   if (this.playerActive == 3){
     this.victoryRoyale();
   } 
   if (this.playerActive == 2){
@@ -127,48 +211,50 @@ draw() {
   }
 
 
-  if (this.counter >= 10000){
-    this.multiplier = 10;  
-    fill(0);
-    text("MAX", 600, 100);
-  } else if (this.counter >= 6000){
-    this.multiplier = 4;
-    // text((int)((counter - 6000)/40), 600, 100);
-    // text("%", 650, 100);
-    noFill();
-    stroke(0);
-    rect(550, 80, 100, 25);
-    noStroke();
-    fill(0);
-    rect(550, 80, (this.counter - 6000)/40 ,25);
-  } else if (this.counter >= 3000){
-    this.multiplier = 3;
-    noFill();
-    stroke(0);
-    rect(550, 80, 100, 25);
-    noStroke();
-    fill(0);
-    rect(550, 80, (this.counter - 3000)/30 ,25);
-  } else if (this.counter >= 1000){
-    this.multiplier = 2;
-    noFill();
-    stroke(0);
-    rect(550, 80, 100, 25);
-    noStroke();
-    fill(0);
-    rect(550, 80, (this.counter-1000)/20 ,25);
-  } else if (this.counter < 1000){
-    noFill();
-    stroke(0);
-    rect(550, 80, 100, 25);
-    this.multiplier = 1;
-    noStroke();
-    fill(0);
-    rect(550, 80, this.counter/10 ,25);
-  }
-
-  //working
-  if (this.playerActive == 4){
+  
+  
+  
+    if (this.counter >= 10000){
+      this.multiplier = 10;  
+      fill(0);
+      text("MAX", 600, 100);
+    } else if (this.counter >= 6000){
+      this.multiplier = 4;
+     // text((int)((counter - 6000)/40), 600, 100);
+     // text("%", 650, 100);
+      noFill();
+      stroke(0);
+      rect(550, 80, 100, 25);
+      noStroke();
+      fill(0);
+      rect(550, 80, (this.counter - 6000)/40 ,25);
+    } else if (this.counter >= 3000){
+      this.multiplier = 3;
+      noFill();
+      stroke(0);
+      rect(550, 80, 100, 25);
+      noStroke();
+      fill(0);
+      rect(550, 80, (this.counter - 3000)/30 ,25);
+    } else if (this.counter >= 1000){
+      this.multiplier = 2;
+      noFill();
+      stroke(0);
+      rect(550, 80, 100, 25);
+      noStroke();
+      fill(0);
+      rect(550, 80, (this.counter-1000)/20 ,25);
+    } else if (this.counter < 1000){
+      noFill();
+      stroke(0);
+      rect(550, 80, 100, 25);
+      this.multiplier = 1;
+      noStroke();
+      fill(0);
+      rect(550, 80, this.counter/10 ,25);
+    }
+  
+    if (this.playerActive == 4){
     this.gameTutorial();
   }
 
@@ -179,17 +265,15 @@ if(this.playerActive == 0){
   this.score = 0;
   this.dscore = 1;
   this.playerActive = 1; //1 = game is playing
-} 
-else if (this.playerActive == 1){
+} else if (this.playerActive == 1){
   this.playerActive = 2;
-} 
-else if (this.playerActive == 2 && !this.menuCollison){
+} else if (this.playerActive == 2 && !this.menuCollison){
   this.playerActive = 1;
-} 
-else if (this.playerActive == 3 && !this.menuCollison){
+} else if (this.playerActive == 3 && !this.menuCollison){
   this.playerActive = 0;
-} 
-else if (this.playerActive == 4){
+  this.score = 0;
+  this.counter = 0;
+} else if (this.playerActive == 4){
   this.playerActive = 0;
 }
  // attempt++;
@@ -200,18 +284,16 @@ if (this.menuCollison){
 }
 
 }
-
-//TODO FIX
-keyPressed(keyCode){
+  
+keyPressed(){
   if (keyCode === ESCAPE){
     //FIXME: make the game returns to the level selection screen. 
-    console.log("esc pressed")
     this.returnToMenu();
   }
 }
-
-keyTyped(key) {
+keyTyped() {
   if (key === 'r'){
+
     this.playerActive = 0;
     this.counter = 0;
     //attempt++;
@@ -220,41 +302,29 @@ keyTyped(key) {
 
   }
 }
-returnToMenu(){
+ returnToMenu(){
   //FIXME: adds a return to menu func. 
 }
-victoryRoyale(){
+ victoryRoyale(){
   if(this.score > 5750){
     this.instructionText = "You won! Press r to restart, esc to exit";
-  } 
-  else {
+  } else {
     this.instructionText = "Try again. You got this.";
   }
-  this.backgroundMusic.stop();
-  
-
+  backgroundMusic.stop();
   fill(255);
   rect(100, 100, 500, 300);
   textSize(30);
   fill(37, 92, 17);
-  if (this.score > 22000) {
-    text("Flawless!", 275, 150); 
-  } 
-  else if (this.score > 10500) {
-    text("Great job!", 275, 150);
-  }
-  else if (this.score > 5750) {
-    text("Not bad!", 175, 150);
-  } 
-  else {
-    text("Try again!", 175, 150);
-  }
-
+  if (this.score > 22000){
+  text("Flawless!", 275, 150); } else if (this.score > 10500) {text("Great job!", 275, 150);}
+  else if (this.score > 5750) {text("Not bad!", 175, 150);} else {text("Try again!", 175, 150);}
   fill(227, 252, 0);
   rect(150, 175, 150, 75);
   textSize(20);
   fill(0);
-  text("Score:", 165, 195);
+
+   text("Score:", 165, 195);
   text(this.score, 185, 215);
   
   if (this.best < this.score || this.best == 0){
@@ -283,7 +353,7 @@ victoryRoyale(){
   text("to Waterflame", 415, 370);
   }
 
-gamePaused(){
+ gamePaused(){
   fill(255);
   rect(100, 100, 500, 300);
   textSize(30);
@@ -294,7 +364,7 @@ gamePaused(){
   textSize(20);
   fill(0);
 
-   text("score:", 165, 195);
+   text("Score:", 165, 195);
   text(this.score, 185, 215);
   
 //  if (best < score || best == 0){
@@ -328,17 +398,15 @@ gamePaused(){
 
 
 
-//working
-playerGuide(){
+
+ playerGuide(){
   text(this.instructionText, 10, 470);
   text("position the circle between the orange and green block! Drag your mouse to move", 10, 490);
   fill(3, 227, 252);
   text("Song: Time Machine 2 by Waterflame", 370, 465);
 }
 
-//working
-createplayer(){
-  
+ createPlayer(){
     //player
   fill(66, 182, 245);
   stroke(0);
@@ -347,8 +415,7 @@ createplayer(){
   this.playerY = mouseY;
 }
 
-//working
-gameTutorial(){
+ gameTutorial(){
   fill(255, 238, 0);
   rect(50, 50, 600, 400);
   fill(0);
@@ -365,10 +432,8 @@ gameTutorial(){
 
 
 
-
-//seems to stop rendering when the game starts
-topBlock(){ //begin
-    this.loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11740, 200);
+ topBlock(){ //begin
+    this.loseCollison =  collidePointRect(mouseX, mouseY, 0, 440, 11700, 200);
 if((this.loseCollison) && (this.playerActive == 1))
   {this.score -= 1; this.counter = 0;}
   noStroke();
@@ -475,9 +540,9 @@ rect(2360+this.mazePos, 40, 260, 150);
 if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 
-//rect(2920 + this.mazePos, 40, 80, 150);
- //   loseCollison =  collidePointRect(mouseX, mouseY,2920 + this.mazePos, 40, 80, 150);
-//if ((loseCollison) && (this.playerActive == 1)){score -= 5; counter = 0;}
+//rect(2920 + mazePos, 40, 80, 150);
+ //   loseCollison =  collidePointRect(mouseX, mouseY,2920 + mazePos, 40, 80, 150);
+//if ((loseCollison) && (playerActive == 1)){score -= 5; counter = 0;}
   
   
   
@@ -606,7 +671,7 @@ if ((this.loseCollison) && (this.playerActive == 1))
   
     //more poles
   rect(8980 + this.mazePos, 0, 2760, 20);
-        this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 0, 2760, 20);
+        this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 0, 2700, 20);
 if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
@@ -700,16 +765,12 @@ if ((this.loseCollison) && (this.playerActive == 1))
 
 
 
-
-bottomBlock(){ //begin
-  console.log("bottom block")
+ bottomBlock(){ //begin
   fill(84, 245, 66); //bottom
   rect(0 + this.mazePos, 80*4, 750*2, 30*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 0 + this.mazePos, 80*4, 750*2, 30*4);
-
-if ((this.loseCollison) && (this.playerActive == 1)) {
-  this.score -= 1; this.counter = 0;
-}
+if ((this.loseCollison) && (this.playerActive == 1))
+{this.score -= 1; this.counter = 0;}
   
   rect(0 + this.mazePos, 70*4, 50*2, 10*4);
   this.loseCollison =  collidePointRect(mouseX, mouseY, 0 + this.mazePos, 70*4, 50*2, 10*4);
@@ -943,7 +1004,7 @@ if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   
     rect(8660 + this.mazePos, 270, 320, 170);
-    this.loseCollison =  collidePointRect(mouseX, mouseY,8240 + this.mazePos, 320, 320, 120);
+    this.loseCollison =  collidePointRect(mouseX, mouseY,8660 + this.mazePos, 270, 320, 170);
 if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}  
   
@@ -953,7 +1014,7 @@ if ((this.loseCollison) && (this.playerActive == 1))
   
     //more poles
   rect(8980 + this.mazePos, 420, 2760, 20);
-        this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 420, 2760, 20);
+        this.loseCollison =  collidePointRect(mouseX, mouseY,8980 + this.mazePos, 420, 2700, 20);
 if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
   
@@ -1019,4 +1080,5 @@ triangle(11460 + this.mazePos, 420, 11600 + this.mazePos, 220, 11740 + this.maze
 if ((this.loseCollison) && (this.playerActive == 1))
 {this.score -= 1; this.counter = 0;}
 }
+  
 }
