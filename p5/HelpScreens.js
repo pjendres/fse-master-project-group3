@@ -82,3 +82,32 @@ class TwistingCircleHelp {
 
     }
 }
+
+class tracingPathHelp{
+    draw(){
+        fill(255, 238, 0);
+       // rect(50, 50, 600, 400);
+        fill(0);
+        textSize(30);
+        textAlign(LEFT);
+        text("How to play:", 125, 100);
+        textSize(20);
+        text("- Blue circle will follow your mouse wherever you", 10, 125);
+        text("go", 10, 150);
+        text("- Click anywhere to begin playing", 10, 175);
+        text("- Try to keep the circle between the orange and" , 10, 200);
+        text("green block! ", 10, 225);
+        text("- Stars indicate your performance." , 10, 250);
+        text("The more you get the better!", 10, 275);
+        text("- Good luck, don't sweat it and have fun!", 10, 300);
+
+        textAlign(RIGHT);
+            text('Main Menu', 480, 30);
+    }
+        mouseClicked() {
+            if ((mouseX < 480 && mouseX > 430) && (mouseY > 15 && mouseY < 35)) {
+                currProgram = 0;
+            }
+        }
+    
+}

@@ -9,7 +9,7 @@ constructor() {
   this.playerX = 0;
   this.playerY = 0;
   this.instructionText;
-  this.playerActive = 4; //0 means stop, 1 means playing, 2 means paused. 
+  this.playerActive = 0; //0 means stop, 1 means playing, 2 means paused. 
   this.mazePos = 0;
   this.winCollison;
   this.loseCollison = false;
@@ -43,6 +43,7 @@ constructor() {
     
     if(this.playerActive == 1){
       this.counter += 10;
+      this.menuCollison = false;
     }
 
     
@@ -192,13 +193,13 @@ constructor() {
   text(this.multiplier, 515, 100);
   //target score
   if (this.score < 22000)
-  text("target: ", 500, 150);
+  text("target: ", 500, 140);
   if (this.score < 5750){
-    text("5750", 600, 150);
+    text("5750", 600, 140);
   } else if (this.score < 10500){
-    text("10500", 600, 150);
+    text("10500", 600, 140);
   } else if (this.score < 22000){
-    text("22000", 600, 150);
+    text("22000", 600, 140);
   }
   
    if (this.playerActive == 3){
@@ -222,6 +223,7 @@ constructor() {
      // text("%", 650, 100);
       noFill();
       stroke(0);
+      strokeWeight(1);
       rect(550, 80, 100, 25);
       noStroke();
       fill(0);
@@ -230,6 +232,7 @@ constructor() {
       this.multiplier = 3;
       noFill();
       stroke(0);
+      strokeWeight(1);
       rect(550, 80, 100, 25);
       noStroke();
       fill(0);
@@ -238,6 +241,7 @@ constructor() {
       this.multiplier = 2;
       noFill();
       stroke(0);
+      strokeWeight(1);
       rect(550, 80, 100, 25);
       noStroke();
       fill(0);
@@ -245,6 +249,7 @@ constructor() {
     } else if (this.counter < 1000){
       noFill();
       stroke(0);
+      strokeWeight(1);
       rect(550, 80, 100, 25);
       this.multiplier = 1;
       noStroke();
@@ -271,13 +276,11 @@ if(this.playerActive == 0){
   this.playerActive = 0;
   this.score = 0;
   this.counter = 0;
-} else if (this.playerActive == 4){
-  this.playerActive = 0;
-}
+} 
  // attempt++;
 
   
-if (this.menuCollison){
+if (this.menuCollison && this.playerActive == 2 || this.playerActive == 3){
   this.returnToMenu();
 }
 
@@ -301,9 +304,12 @@ keyTyped() {
   }
 }
  returnToMenu(){
-  this.playerActive = 4;
-  this.counter = 0;
+
   currProgram = 0;
+  this.playerActive = 0;
+  this.counter = 0;
+  this.score = 0;
+  backgroundMusic.stop();
 
   //FIXME: adds a return to menu func. 
 }
@@ -403,9 +409,9 @@ keyTyped() {
 
  playerGuide(){
   text(this.instructionText, 10, 470);
-  text("position the circle between the orange and green block! Drag your mouse to move", 10, 490);
+  text("position the circle between the orange and green block!", 10, 490);
   fill(3, 227, 252);
-  text("Song: Time Machine 2 by Waterflame", 370, 465);
+  text("Song: Time Machine 2 by Waterflame", 350, 465);
 }
 
  createPlayer(){
@@ -417,20 +423,7 @@ keyTyped() {
   this.playerY = mouseY;
 }
 
- gameTutorial(){
-  fill(255, 238, 0);
-  rect(50, 50, 600, 400);
-  fill(0);
-  textSize(30);
-  text("How to play:", 275, 100);
-  textSize(20);
-  text("- Blue circle will follow your mouse wherever you go", 75, 125);
-  text("- Click anywhere to begin playing", 75, 150);
-  text("- Try to keep the circle between the orange and green block! ", 75, 175);
-  text("- Stars indicate your performance. The more you get the better!", 75, 200);
-  text("- Good luck, don't sweat it and have fun!", 75, 225);
-
-}
+ 
 
 
 
