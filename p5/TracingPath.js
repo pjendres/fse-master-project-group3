@@ -303,6 +303,7 @@ keyTyped() {
  returnToMenu(){
   this.playerActive = 4;
   this.counter = 0;
+  stroke(0);
   currProgram = 0;
 
   //FIXME: adds a return to menu func. 
