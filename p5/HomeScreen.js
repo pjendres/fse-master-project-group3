@@ -94,6 +94,7 @@ class MenuButton {
     }
     
     strokeWeight(1);
+    stroke(0);
     //draw rectangle
     rect(this.x, this.y, this.width, this.height);
 
