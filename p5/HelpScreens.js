@@ -11,7 +11,7 @@ class TwisterHelp{
             "       Twister is a very simple game, simply place your fingers on the circles\n" + 
             "and don't let go! The more fingers you have placed on each button, the\n" +
             "faster your score increases! With 3 fingers, you will get x3 Score. Finally,\n" +
-            "one you hit 10,000 points total, you win!\n\n" +
+            "one you hit 1,000 points total, you win!\n\n" +
             
             "Extra challenges: \n" +
             "     - Try incorporating your thumb or pinky\n" +
